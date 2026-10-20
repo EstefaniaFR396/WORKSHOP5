@@ -4,8 +4,8 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        DoublyLinkedList<int> list =
-            new DoublyLinkedList<int>();
+        DoublyLinkedList<string> list =
+         new DoublyLinkedList<string>();
 
         int option = -1;
 
@@ -35,28 +35,23 @@ internal class Program
                 continue;
             }
 
-            int value;
+            String value;
 
             switch (option)
             {
                 case 1:
-                    Console.Write("Ingrese un numero: ");
+                    Console.Write("Ingrese un valor: ");
 
-                    if (int.TryParse(
-                        Console.ReadLine(), out value))
-                    {
-                        list.Add(value);
+                    value = Console.ReadLine() ?? "";
 
-                        Console.WriteLine(
-                            "Elemento agregado correctamente.");
+                    list.Add(value);
 
-                        Console.Write("Lista actual: ");
-                        list.DisplayForward();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Numero invalido.");
-                    }
+                    Console.WriteLine(
+                        "Elemento agregado correctamente.");
+
+                    Console.Write("Lista actual: ");
+                    list.DisplayForward();
+
                     break;
 
                 case 2:
@@ -92,74 +87,57 @@ internal class Program
 
                 case 7:
                     Console.Write(
-                        "Ingrese el numero que desea buscar: ");
+                        "Ingrese el valor que desea buscar: ");
 
-                    if (int.TryParse(
-                        Console.ReadLine(), out value))
+                    value = Console.ReadLine() ?? "";
+
+                    if (list.Contains(value))
                     {
-                        if (list.Contains(value))
-                        {
-                            Console.WriteLine(
-                                $"El numero {value} SI existe.");
-                        }
-                        else
-                        {
-                            Console.WriteLine(
-                                $"El numero {value} NO existe.");
-                        }
+                        Console.WriteLine(
+                            $"El valor {value} SI existe.");
                     }
                     else
                     {
-                        Console.WriteLine("Numero invalido.");
+                        Console.WriteLine(
+                            $"El numero {value} NO existe.");
                     }
+
                     break;
 
                 case 8:
                     Console.Write(
-                        "Numero que desea eliminar una vez: ");
+                       "Valor del que desea eliminar todas las ocurrencias: ");
 
-                    if (int.TryParse(
-                        Console.ReadLine(), out value))
+                    value = Console.ReadLine() ?? "";
+
+                    if (list.RemoveOne(value))
                     {
-                        if (list.RemoveOne(value))
-                        {
-                            Console.WriteLine(
-                                "Una ocurrencia fue eliminada.");
-                        }
-                        else
-                        {
-                            Console.WriteLine(
-                                "El numero no existe.");
-                        }
-
-                        Console.Write("Lista actual: ");
-                        list.DisplayForward();
+                        Console.WriteLine(
+                            "Una ocurrencia fue eliminada.");
                     }
                     else
                     {
-                        Console.WriteLine("Numero invalido.");
+                        Console.WriteLine(
+                            "El valor no existe.");
                     }
+
+                    Console.Write("Lista actual: ");
+                    list.DisplayForward();
                     break;
 
                 case 9:
                     Console.Write(
-                        "Numero del que desea eliminar todas las ocurrencias: ");
+         "Valor del que desea eliminar todas las ocurrencias: ");
 
-                    if (int.TryParse(
-                        Console.ReadLine(), out value))
-                    {
-                        int removedCount = list.RemoveAll(value);
+                    value = Console.ReadLine() ?? "";
 
-                        Console.WriteLine(
-                            $"Ocurrencias eliminadas: {removedCount}");
+                    int removedCount = list.RemoveAll(value);
 
-                        Console.Write("Lista actual: ");
-                        list.DisplayForward();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Numero invalido.");
-                    }
+                    Console.WriteLine(
+                        $"Ocurrencias eliminadas: {removedCount}");
+
+                    Console.Write("Lista actual: ");
+                    list.DisplayForward();
                     break;
 
                 case 0:
