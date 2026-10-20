@@ -1,0 +1,178 @@
+﻿using Backend;
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        DoublyLinkedList<int> list =
+            new DoublyLinkedList<int>();
+
+        int option = -1;
+
+        do
+        {
+            Console.WriteLine("\n======================================");
+            Console.WriteLine(" TALLER 5 - LISTAS DOBLEMENTE LIGADAS");
+            Console.WriteLine("======================================");
+            Console.WriteLine("1. Adicionar");
+            Console.WriteLine("2. Mostrar hacia adelante");
+            Console.WriteLine("3. Mostrar hacia atras");
+            Console.WriteLine("4. Ordenar descendentemente");
+            Console.WriteLine("5. Mostrar la(s) moda(s)");
+            Console.WriteLine("6. Mostrar grafico");
+            Console.WriteLine("7. Existe");
+            Console.WriteLine("8. Eliminar una ocurrencia");
+            Console.WriteLine("9. Eliminar todas las ocurrencias");
+            Console.WriteLine("0. Salir");
+            Console.WriteLine("======================================");
+            Console.Write("Seleccione una opcion: ");
+
+            if (!int.TryParse(
+                Console.ReadLine(), out option))
+            {
+                Console.WriteLine("Ingrese una opcion valida.");
+                option = -1;
+                continue;
+            }
+
+            int value;
+
+            switch (option)
+            {
+                case 1:
+                    Console.Write("Ingrese un numero: ");
+
+                    if (int.TryParse(
+                        Console.ReadLine(), out value))
+                    {
+                        list.Add(value);
+
+                        Console.WriteLine(
+                            "Elemento agregado correctamente.");
+
+                        Console.Write("Lista actual: ");
+                        list.DisplayForward();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Numero invalido.");
+                    }
+                    break;
+
+                case 2:
+                    Console.WriteLine(
+                        "\nRECORRIDO HACIA ADELANTE");
+
+                    list.DisplayForward();
+                    break;
+
+                case 3:
+                    Console.WriteLine(
+                        "\nRECORRIDO HACIA ATRAS");
+
+                    list.DisplayBackward();
+                    break;
+
+                case 4:
+                    list.SortDescending();
+
+                    Console.WriteLine(
+                        "Lista en orden descendente:");
+
+                    list.DisplayForward();
+                    break;
+
+                case 5:
+                    list.DisplayModes();
+                    break;
+
+                case 6:
+                    list.DisplayGraph();
+                    break;
+
+                case 7:
+                    Console.Write(
+                        "Ingrese el numero que desea buscar: ");
+
+                    if (int.TryParse(
+                        Console.ReadLine(), out value))
+                    {
+                        if (list.Contains(value))
+                        {
+                            Console.WriteLine(
+                                $"El numero {value} SI existe.");
+                        }
+                        else
+                        {
+                            Console.WriteLine(
+                                $"El numero {value} NO existe.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Numero invalido.");
+                    }
+                    break;
+
+                case 8:
+                    Console.Write(
+                        "Numero que desea eliminar una vez: ");
+
+                    if (int.TryParse(
+                        Console.ReadLine(), out value))
+                    {
+                        if (list.RemoveOne(value))
+                        {
+                            Console.WriteLine(
+                                "Una ocurrencia fue eliminada.");
+                        }
+                        else
+                        {
+                            Console.WriteLine(
+                                "El numero no existe.");
+                        }
+
+                        Console.Write("Lista actual: ");
+                        list.DisplayForward();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Numero invalido.");
+                    }
+                    break;
+
+                case 9:
+                    Console.Write(
+                        "Numero del que desea eliminar todas las ocurrencias: ");
+
+                    if (int.TryParse(
+                        Console.ReadLine(), out value))
+                    {
+                        int removedCount = list.RemoveAll(value);
+
+                        Console.WriteLine(
+                            $"Ocurrencias eliminadas: {removedCount}");
+
+                        Console.Write("Lista actual: ");
+                        list.DisplayForward();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Numero invalido.");
+                    }
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Programa finalizado.");
+                    break;
+
+                default:
+                    Console.WriteLine(
+                        "Opcion no valida.");
+                    break;
+            }
+
+        } while (option != 0);
+    }
+}
